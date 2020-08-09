@@ -1,0 +1,56 @@
+package dijkstra;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        int V = 6;
+        int source = 0;
+        List<List<Node>> adj = new ArrayList<List<Node>>();
+
+        for (int i = 0; i < V; i++) {
+            List<Node> item = new ArrayList<Node>();
+            adj.add(item);
+        }
+
+        adj.get(0).add(new Node(1, 2)); /* A'dan B'ye maliyet=2 */
+
+        adj.get(0).add(new Node(3, 6)); /* A'dan D'ye maliyet=6 */
+
+        adj.get(1).add(new Node(2, 9)); /* B'den C'ye maliyet=9 */
+
+        adj.get(1).add(new Node(4, 3)); /* B'den E'ye maliyet=3 */
+
+        adj.get(4).add(new Node(2, 4)); /* E'den C'ye maliyet=4 */
+
+        adj.get(4).add(new Node(3, 1)); /* E'den D'ye maliyet=1 */
+
+        adj.get(2).add(new Node(3, 7)); /* C'den D'ye maliyet=7 */
+
+        adj.get(2).add(new Node(5, 2)); /* C'den F'ye maliyet=2 */
+
+        adj.get(3).add(new Node(5, 8)); /* D'den F'ye maliyet=8 */
+
+        Dijkstra dpq = new Dijkstra(V);
+        dpq.dijkstra(adj, source);
+
+        System.out.println("0 = A");
+        System.out.println("1 = B");
+        System.out.println("2 = C");
+        System.out.println("3 = D");
+        System.out.println("4 = E");
+        System.out.println("5 = F");
+        System.out.println("--------");
+
+        for (int i = 0; i < dpq.dist.length; i++) {
+
+            System.out.println(source + " noktasından " + i + " noktasına en az maliyet = "
+                    + dpq.dist[i]);
+
+        }
+
+    }
+}
